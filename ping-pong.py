@@ -7,6 +7,11 @@ win_height = 500
 display.set_caption('Ping-pong')
 window = display.set_mode((win_width, win_height))
 window.fill((win_back))
+game = True
+finish = False
+score1 = 0
+score2 = 0
+max_score = 3
 clock = time.Clock()
 img_playr = 'tennis.png'
 img_pltfr = 'platform.png'
@@ -41,6 +46,7 @@ class Player(GameSprite):
 ball = GameSprite('tennis.png', 275, 275, 50, 50, 3)
 pl_l = Player('platform.png', 30, 100, 30, 350, 3)
 pl_r = Player('platform.png', 570, 100, 30, 350, 3)
+font1 = font.Font(None, 35)
 
 run = True
 finish = False
@@ -61,9 +67,11 @@ while run:
         pl_r.reset()
         ball.rect.x += speed_x 
         ball.rect.y += speed_y
+        score_text = font1.render(str(score1) + ' : ' + str(score2), True, (0, 0, 0))
+        window.blit(score_text, (200, 20))
     if ball.rect.y > win_height-50 or ball.rect.y < 0:
         speed_y *= -1
     if sprite.collide_rect(pl_l, ball) or sprite.collide_rect(pl_r, ball):
-        speed_x *= -1
+        speed_x *= -1.07
     display.update()
     clock.tick(55)
