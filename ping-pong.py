@@ -44,6 +44,8 @@ pl_r = Player('platform.png', 570, 100, 30, 350, 3)
 
 run = True
 finish = False
+speed_x = 2
+speed_y = 2
 while run:
     for e in event.get():
         if e.type == QUIT:
@@ -57,5 +59,11 @@ while run:
         pl_l.reset()
         pl_r.update_r()
         pl_r.reset()
+        ball.rect.x += speed_x 
+        ball.rect.y += speed_y
+    if ball.rect.y > win_height-50 or ball.rect.y < 0:
+        speed_y *= -1
+    if sprite.collide_rect(pl_l, ball) or sprite.collide_rect(pl_r, ball):
+        speed_x *= -1
     display.update()
     clock.tick(55)
