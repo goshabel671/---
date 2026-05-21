@@ -73,5 +73,11 @@ while run:
         speed_y *= -1
     if sprite.collide_rect(pl_l, ball) or sprite.collide_rect(pl_r, ball):
         speed_x *= -1.07
+    if ball.rect.x > 550:
+        speed_x *= -1
+    if ball.rect.x < 50:
+        speed_x *= -1
     display.update()
     clock.tick(55)
+
+    
